@@ -7,7 +7,7 @@ module.exports = {
     
     await queryInterface.bulkInsert('Users', [{
       name: 'Disa Syuhada',
-      password: bycrypt.hashSync('123', 10),
+      password: bycrypt.hashSync('disa', 10),
       email: 'disaada@gmail.com',
       avatar: '',
       birth_date: '1996-04-11',
