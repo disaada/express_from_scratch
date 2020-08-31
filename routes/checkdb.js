@@ -1,9 +1,15 @@
+const db = require('../models')
+
 const checkdb = (req, res) => {
-    const db = require('../models')
+
     db.sequelize.authenticate().then(
-        () => res.send('connected'),
+        async () => {
+            const user = await db.User.findByPk(1)
+            res.send(user)
+        },
         () => res.send('error')
     )
+
 }
 
 module.exports = checkdb
