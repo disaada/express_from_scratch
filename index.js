@@ -36,8 +36,16 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: 'auto' },
     store: SequelizeSessionStore
-  }))
+    }))
 // End Express session
+
+// Express fileupload
+const fileupload = require('express-fileupload')
+app.use(fileupload({
+    createParentPath: true,
+    debug: true
+}))
+// End Express fileupload
 
 // Route Start
 const config = require('./config')
@@ -52,7 +60,10 @@ app.get('/login', login.get)
 app.post('/login', login.post)
 app.get('/logout', logout)
 app.get('/dashboard', checkIsLoggedIn, dashboard)
-app.use('/dashboard/users', users)
+app.get('/users', users.create_get)
+app.post('/users', users.create_post)
+app.get('/users/:id', users.details)
+app.use('/uploads', express.static('uploads'))
 app.get('/test-db', require('./routes/checkdb'))
 //Route End
 
@@ -60,7 +71,7 @@ app.get('/test-db', require('./routes/checkdb'))
 const run = async () => {
     try {
         const port = await portfinder.getPortPromise({ port: config.port })
-        app.listen(port, () => {console.log('listening at port '+port)})
+        app.listen(port, () => {console.log(`listening at port ${port}`)})
     } catch (err) {
         console.log(err)
     }

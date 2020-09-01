@@ -1,0 +1,10 @@
+{{#contentFor 'body'}}
+        <form method="POST" action="/users" enctype="multipart/form-data">
+            Name : <input type="text" name="name" ><br/>            
+            Email : <input type="email" name="email" ><br/>
+            Password : <input type="password" name="password" ><br/>      
+            Date Birth : <input type="date" name="birth_date" ><br/>
+            Avatar : <input type="file" name="avatar" ><br/>      
+            <input type="submit" value="Send">
+        </form>
+{{/contentFor}}
